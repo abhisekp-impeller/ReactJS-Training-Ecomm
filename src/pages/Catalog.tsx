@@ -23,7 +23,7 @@ export const Catalog = () => {
           <CatalogProduct {...product} />
           <Button variant="primary" onClick={() => navigate(`/catalog/products/${product.id}`)}>View</Button>
         </React.Fragment>
-      )) : <p>No products found - <Link to="add"><Button>Create a New Product</Button></Link></p>}
+      )) : <p>No products found - <Link to="/catalog/add"><Button>Create a New Product</Button></Link></p>}
     </>
   );
 };
