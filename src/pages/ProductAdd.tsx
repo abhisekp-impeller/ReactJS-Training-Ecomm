@@ -1,5 +1,5 @@
 import { Form, redirect, useActionData, useRouteError } from 'react-router-dom'
-import { addProduct } from '../ds/product-ds'
+import { addProduct } from '../datasource/product'
 import { Product } from "../types/Product";
 import { ProductErrors } from "../errors/product-errors";
 import { CatalogProduct } from "../components/CatalogProduct";

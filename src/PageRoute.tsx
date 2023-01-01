@@ -9,6 +9,7 @@ import {
 import { action as productEditAction, loader as productEditLoader, ProductEdit } from "./pages/ProductEdit";
 import { action as productAddAction, ErrorBoundary as ProductAddErrorBoundary, ProductAdd } from "./pages/ProductAdd";
 import { action as productDeleteAction } from './pages/ProductDelete'
+import { CartPage, loader as cartLoader } from './pages/Cart'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,7 +29,8 @@ const router = createBrowserRouter(
              index
              action={productEditAction}
              loader={productEditLoader}/>
-      <Route path="/catalog/products/:id/delete" action={productDeleteAction} />
+      <Route path="/catalog/products/:id/delete" action={productDeleteAction}/>
+      <Route path="/cart" element={<CartPage/>} loader={cartLoader}/>
     </Route>
   )
 )

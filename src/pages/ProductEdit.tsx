@@ -10,10 +10,13 @@ import {
   useLoaderData,
   useSubmit
 } from "react-router-dom";
-import { getProductById, updateProductById } from "../ds/product-ds";
+import { getProductById, updateProductById } from "../datasource/product";
 import { ProductErrors } from "../errors/product-errors";
 import { Button, ButtonGroup } from "react-bootstrap";
 import React, { useCallback, useRef } from "react";
+import Swal from 'sweetalert2'
+import { toast } from 'react-toastify'
+import dedent from 'dedent';
 
 export const action: ActionFunction = async ({ request }) => {
   const productFormData = await request.formData();
@@ -50,16 +53,25 @@ export const ProductEdit = () => {
   const submit = useSubmit()
   const deleteFormRef = useRef(null);
 
-  const handleDelete = useCallback(() => {
-    if (deleteFormRef.current) {
-      submit(deleteFormRef.current)
+  const handleDelete = useCallback(async () => {
+    const confirmedDelete = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!'
+    })
+    if (confirmedDelete.isConfirmed) {
+      if (deleteFormRef.current) {
+        submit(deleteFormRef.current)
+      }
     }
-  }, [submit])
+  }, [product.name, submit])
 
   return (
     <div>
       <h1>Product Edit</h1>
-      <Form ref={deleteFormRef} method="post" action={`/catalog/products/${product.id}/delete`} />
+      <Form ref={deleteFormRef} method="post" action={`/catalog/products/${product.id}/delete`}/>
       <Form method="put">
         <CatalogProduct {...product} errors={errors} mode="edit"/>
         <ButtonGroup>

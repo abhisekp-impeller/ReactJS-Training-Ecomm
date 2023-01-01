@@ -28,3 +28,9 @@ export class ErrorProductNotFound extends Error {
     super(msg || `No Product found with ID: ${productId}`);
   }
 }
+
+export class ErrorProductNotAvailable extends Error {
+  constructor(productId: string, msg?: string) {
+    super(msg || `Product with ID: ${productId} is not available`);
+  }
+}

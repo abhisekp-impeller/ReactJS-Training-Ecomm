@@ -12,6 +12,7 @@
   "dependencies": {
     "@uiw/react-md-editor": "^3.20.1",
     "bootstrap": "^5.2.3",
+    "dedent": "^0.7.0",
     "immer": "^9.0.16",
     "katex": "^0.16.4",
     "localforage": "^1.10.0",
@@ -23,12 +24,16 @@
     "react-dom": "^18.2.0",
     "react-router-bootstrap": "^0.26.2",
     "react-router-dom": "^6.6.1",
+    "react-toastify": "^9.1.1",
     "rehype-sanitize": "^5.0.1",
     "sift": "^16.0.1",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "sweetalert2": "^11.6.16"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@popperjs/core": "^2.11.6",
+    "@types/dedent": "^0.7.0",
     "@types/katex": "^0.16.0",
     "@types/lodash": "^4.14.191",
     "@types/node": "^18.11.18",

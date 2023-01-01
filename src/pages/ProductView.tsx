@@ -9,10 +9,13 @@ import {
   useSubmit
 } from "react-router-dom";
 import { Product } from "../types/Product";
-import { getProductById } from "../ds/product-ds";
+import { getProductById } from "../datasource/product";
 import { ErrorProductNotFound } from "../errors/product-errors";
 import React, { FunctionComponent, useCallback, useRef } from "react";
 import { Button, ButtonGroup } from "react-bootstrap";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import dedent from 'dedent';
 
 export interface Params extends LoaderParams {
   id: string;
@@ -35,11 +38,20 @@ export const ProductView = () => {
   const deleteFormRef = useRef(null);
   const navigate = useNavigate()
 
-  const handleDelete = useCallback(() => {
-    if (deleteFormRef.current) {
-      submit(deleteFormRef.current)
+  const handleDelete = useCallback(async () => {
+    const confirmedDelete = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!'
+    })
+    if (confirmedDelete.isConfirmed) {
+      if (deleteFormRef.current) {
+        submit(deleteFormRef.current)
+      }
     }
-  }, [submit])
+  }, [product.name, submit])
 
   return (
     <div>

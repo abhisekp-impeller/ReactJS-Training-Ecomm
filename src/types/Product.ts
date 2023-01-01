@@ -1,14 +1,20 @@
+import { Price, Quantity } from "./types";
+
 export interface WithId {
   id: string;
 }
 
 export interface WithAvailability {
-  availability: number;
+  availability: Quantity;
 
 }
 
 export interface WithPrice {
-  price: number;
+  price: Price;
+}
+
+export interface WithDeleted {
+  deleted: boolean;
 }
 
 export interface WithProduct {
@@ -17,4 +23,4 @@ export interface WithProduct {
   image?: string;
 }
 
-export type Product = WithId & WithAvailability & WithPrice & WithProduct;
+export type Product = WithId & WithAvailability & WithPrice & Partial<WithDeleted> & WithProduct;

@@ -19,12 +19,13 @@ export const ProductDescriptionInput: FunctionComponent<ProductDescriptionInputP
 }) => {
   const [markdownEnabled, setMarkdownEnabled] = useState(markdown);
 
-  return <div data-color-mode="light"><label htmlFor="description">Description {mode !== "view" && ["(",
-    <input key="1" type="checkbox"
-           id="markdown"
-           checked={markdownEnabled}
-           onChange={() => setMarkdownEnabled(!markdownEnabled)}/>,
-    <FormLabel htmlFor="markdown" key={2}>Markdown)</FormLabel>]}</label>
+  return <div data-color-mode="light">
+    <label htmlFor="description">Description {mode !== "view" && ["(",
+      <input key="1" type="checkbox"
+             id="markdown"
+             checked={markdownEnabled}
+             onChange={() => setMarkdownEnabled(!markdownEnabled)}/>,
+      <FormLabel htmlFor="markdown" key={2}>Markdown)</FormLabel>]}</label>
     {mode === "view" ? <MDEditor.Markdown className="form-control" source={props.defaultValue || "N/A"}/> :
       <ProductDescriptionEditor markdown={markdownEnabled} {...props}/>}
     {["add", "edit"].includes(mode) &&
