@@ -1,4 +1,4 @@
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider } from "react-router-dom";
 import { loader as rootLoader, Root } from "./pages/Root";
 import { Catalog, loader as catalogLoader } from "./pages/Catalog";
 import {
@@ -11,15 +11,20 @@ import { action as productAddAction, ErrorBoundary as ProductAddErrorBoundary, P
 import { action as productDeleteAction } from "./pages/ProductDelete";
 import { action as cartAction, CartPage, loader as cartLoader, } from "@pages/cart";
 import { CART_PAGE } from "./constants/cart";
-import { PRODUCT_ADD_PAGE, PRODUCT_BY_ID_PAGE, PRODUCT_DELETE_PAGE, PRODUCT_EDIT_PAGE } from "./constants/product";
+import {
+  CATALOG_PAGE,
+  PRODUCT_ADD_PAGE,
+  PRODUCT_BY_ID_PAGE,
+  PRODUCT_DELETE_PAGE,
+  PRODUCT_EDIT_PAGE
+} from "./constants/product";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" loader={rootLoader} element={<Root/>} id="root">
-      <Route index element={<Catalog/>} loader={catalogLoader}/>
+      <Route index element={<Navigate to={CATALOG_PAGE} replace/>} loader={catalogLoader}/>
       <Route
-        path="/catalog"
-        index
+        path={CATALOG_PAGE}
         element={<Catalog/>}
         loader={catalogLoader}
       />
