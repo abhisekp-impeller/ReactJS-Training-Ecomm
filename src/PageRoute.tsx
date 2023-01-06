@@ -32,20 +32,17 @@ const router = createBrowserRouter(
         path={PRODUCT_ADD_PAGE}
         element={<ProductAdd/>}
         action={productAddAction}
-        index
         errorElement={<ProductAddErrorBoundary/>}
       />
       <Route
         path={PRODUCT_BY_ID_PAGE}
         element={<ProductView/>}
-        index
         loader={productViewLoader}
         errorElement={<ProductViewErrorBoundary/>}
       />
       <Route
         path={PRODUCT_EDIT_PAGE}
         element={<ProductEdit/>}
-        index
         action={productEditAction}
         loader={productEditLoader}
       />

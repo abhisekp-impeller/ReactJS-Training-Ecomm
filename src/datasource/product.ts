@@ -28,12 +28,13 @@ export const addProduct = async <
   }
   const products = await getProducts<P>();
 
+  // collision check
   if (products.find((p) => p.id === product.id)) {
     return addProduct(product);
   }
 
   const newProducts = [...products, product];
-  await localforage.setItem(PRODUCTS_KEY, newProducts);
+  await localforage.setItem(PRODUCTS_KEY, newProducts); // X not good practice
   await localforage.setItem(product.id, product);
   return product;
 };

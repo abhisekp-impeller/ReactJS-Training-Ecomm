@@ -16,7 +16,7 @@ import { ProductErrors } from "~/errors/product-errors";
 import { Button, ButtonGroup } from "react-bootstrap";
 import React, { useCallback, useRef } from "react";
 import Swal from "sweetalert2";
-import { PRODUCT_BY_ID_PAGE } from "~/constants/product";
+import { PRODUCT_BY_ID_PAGE, PRODUCT_DELETE_PAGE } from "~/constants/product";
 
 export const action: ActionFunction = async ({ request }) => {
   const productFormData = await request.formData();
@@ -71,7 +71,7 @@ export const ProductEdit = () => {
         submit(deleteFormRef.current);
       }
     }
-  }, [product.name, submit]);
+  }, [submit]);
 
   return (
     <div>
@@ -79,7 +79,7 @@ export const ProductEdit = () => {
       <Form
         ref={deleteFormRef}
         method="post"
-        action={`/catalog/products/${product.id}/delete`}
+        action={PRODUCT_DELETE_PAGE.replace(':id', product.id)}
       />
       <Form method="put">
         <CatalogProduct {...product} errors={errors} mode="edit"/>

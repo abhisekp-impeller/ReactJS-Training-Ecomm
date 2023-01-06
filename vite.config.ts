@@ -34,7 +34,7 @@ export default ({ mode }) => {
           replacement: '/src/components/$1',
         },
         {
-          // for easy components access
+          // for easy page access
           find: /^@pages\/(.*)/,
           replacement: '/src/pages/$1',
         },

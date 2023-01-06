@@ -21,6 +21,7 @@ export const Root = () => {
     <Container>
       <ScrollRestoration/>
       <ToastContainer/>
+
       <Navbar variant="dark" bg="dark">
         <Container>
           <Navbar.Brand>

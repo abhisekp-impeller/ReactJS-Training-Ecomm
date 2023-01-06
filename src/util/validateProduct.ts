@@ -1,5 +1,5 @@
-import { WithAvailability, WithPrice } from "../types/Product";
-import { ErrorProductAvailabilityNotLessThanZero, ErrorProductPriceNotLessThanZero, } from "../errors/product-errors";
+import { WithAvailability, WithPrice } from "~/types/Product";
+import { ErrorProductAvailabilityNotLessThanZero, ErrorProductPriceNotLessThanZero, } from "~/errors/product-errors";
 
 export const validateProduct = <
   P extends Partial<WithPrice> & Partial<WithAvailability>

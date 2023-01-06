@@ -3,11 +3,12 @@ import { addToCart, getCart } from "~/datasource/cart";
 import { Product } from "~/types/Product";
 import { Cart, CartItem } from "~/types/Cart";
 import { getProductById } from "~/datasource/product";
-import { ErrorProductNotFound } from "~/errors/product-errors";
+import { ErrorProductNotAvailable, ErrorProductNotFound } from "~/errors/product-errors";
 import { Col, FormControl, Image, Row, Table } from "react-bootstrap";
 import { CART_PAGE } from "~/constants/cart";
 import React, { FunctionComponent, useCallback } from "react";
 import { CartStyle } from "@pages/cart/CartStyle";
+import { toast } from "react-toastify";
 
 export const loader: LoaderFunction = async () => {
   const cart = await getCart();
@@ -24,7 +25,15 @@ export const action: ActionFunction = async ({ request }) => {
     throw new ErrorProductNotFound(productId);
   }
 
-  return await addToCart<Product>(product, { quantity });
+  try {
+    await addToCart<Product>(product, { quantity });
+  } catch (e) {
+    if (e instanceof ErrorProductNotAvailable) {
+      toast(e.message, { type: "error" });
+      return null;
+    }
+    throw e;
+  }
 };
 
 interface QuantityInputProps {
