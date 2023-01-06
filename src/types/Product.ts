@@ -6,7 +6,6 @@ export interface WithId {
 
 export interface WithAvailability {
   availability: Quantity;
-
 }
 
 export interface WithPrice {
@@ -23,4 +22,8 @@ export interface WithProduct {
   image?: string;
 }
 
-export type Product = WithId & WithAvailability & WithPrice & Partial<WithDeleted> & WithProduct;
+export type Product = WithId &
+  WithAvailability &
+  WithPrice &
+  Partial<WithDeleted> &
+  WithProduct;

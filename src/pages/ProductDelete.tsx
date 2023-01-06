@@ -10,14 +10,14 @@ export const action: ActionFunction = async ({ params }) => {
     const product = await softDeleteProductById<Product>(params.id!);
     toast.success(dedent`
       Product: ${product.name} has been deleted.
-    `)
+    `);
     return redirect("/catalog");
   } catch (e) {
     if (e instanceof ErrorProductNotFound) {
-      toast.error(e.message)
+      toast.error(e.message);
       return redirect("/catalog");
     }
 
     throw e;
   }
-}
+};

@@ -7,7 +7,7 @@ export interface CartItem<P> {
   price: Price;
 }
 
-export interface Cart<P> {
+export interface Cart<P = any> {
   id: string;
   items: CartItem<P>[];
   quantity: Quantity;

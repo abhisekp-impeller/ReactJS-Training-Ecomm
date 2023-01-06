@@ -14,7 +14,29 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "types": [
+      "vitest/importMeta",
+      "vitest/globals"
+    ],
+    "baseUrl": "src",
+    "paths": {
+      "@components/*": [
+        "components/*"
+      ],
+      "@comps/*": [
+        "components/*"
+      ],
+      "@component/*": [
+        "components/*"
+      ],
+      "@comp/*": [
+        "components/*"
+      ],
+      "test-util": [
+        "utils/test-util"
+      ]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
