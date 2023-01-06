@@ -1,8 +1,9 @@
-import { CatalogProduct } from "../components/CatalogProduct";
-import type { Product } from "../types/Product";
+import { CatalogProduct } from "@components/CatalogProduct";
+import type { Product } from "~/types/Product";
 import {
   ActionFunction,
-  Form, json,
+  Form,
+  json,
   LoaderFunction,
   Params as LoaderParams,
   redirect,
@@ -10,11 +11,12 @@ import {
   useLoaderData,
   useSubmit,
 } from "react-router-dom";
-import { getProductById, updateProductById } from "../datasource/product";
-import { ProductErrors } from "../errors/product-errors";
+import { getProductById, updateProductById } from "~/datasource/product";
+import { ProductErrors } from "~/errors/product-errors";
 import { Button, ButtonGroup } from "react-bootstrap";
 import React, { useCallback, useRef } from "react";
 import Swal from "sweetalert2";
+import { PRODUCT_BY_ID_PAGE } from "~/constants/product";
 
 export const action: ActionFunction = async ({ request }) => {
   const productFormData = await request.formData();
@@ -29,7 +31,7 @@ export const action: ActionFunction = async ({ request }) => {
       productData.id,
       productData
     );
-    return redirect(`/catalog/products/${product.id}`);
+    return redirect(PRODUCT_BY_ID_PAGE.replace(':id', product.id));
   } catch (e) {
     if (e instanceof ProductErrors) {
       return { errors: e };
@@ -80,7 +82,7 @@ export const ProductEdit = () => {
         action={`/catalog/products/${product.id}/delete`}
       />
       <Form method="put">
-        <CatalogProduct {...product} errors={errors} mode="edit" />
+        <CatalogProduct {...product} errors={errors} mode="edit"/>
         <ButtonGroup>
           <Button type="submit" variant="primary">
             Submit

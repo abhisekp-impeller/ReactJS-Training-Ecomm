@@ -1,6 +1,7 @@
-import { CatalogProduct } from "../components/CatalogProduct";
+import { CatalogProduct } from "@components/CatalogProduct";
 import {
-  Form, json,
+  Form,
+  json,
   LoaderFunction,
   Params as LoaderParams,
   useLoaderData,
@@ -8,12 +9,13 @@ import {
   useRouteError,
   useSubmit,
 } from "react-router-dom";
-import { Product } from "../types/Product";
-import { getProductById } from "../datasource/product";
-import { ErrorProductNotFound } from "../errors/product-errors";
+import { Product } from "~/types/Product";
+import { getProductById } from "~/datasource/product";
+import { ErrorProductNotFound } from "~/errors/product-errors";
 import React, { FunctionComponent, useCallback, useRef } from "react";
 import { Button, ButtonGroup } from "react-bootstrap";
 import Swal from "sweetalert2";
+import { PRODUCT_DELETE_PAGE, PRODUCT_EDIT_PAGE } from "~/constants/product";
 
 export interface Params extends LoaderParams {
   id: string;
@@ -57,13 +59,13 @@ export const ProductView = () => {
       <Form
         ref={deleteFormRef}
         method="post"
-        action={`/catalog/products/${product.id}/delete`}
+        action={PRODUCT_DELETE_PAGE.replace(":id", product.id)}
       />
-      <CatalogProduct {...product} mode="view" />
+      <CatalogProduct {...product} mode="view"/>
       <ButtonGroup>
         <Button
           variant="primary"
-          onClick={() => navigate(`/catalog/products/${product.id}/edit`)}
+          onClick={() => navigate(PRODUCT_EDIT_PAGE.replace(":id", product.id))}
         >
           Edit
         </Button>

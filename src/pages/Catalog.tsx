@@ -1,17 +1,11 @@
 import React, { FunctionComponent, Suspense } from "react";
-import {
-  Await,
-  defer, json,
-  Link,
-  LoaderFunction,
-  useFetcher,
-  useLoaderData,
-  useNavigate,
-} from "react-router-dom";
-import { getProducts, seedProducts } from "../datasource/product";
-import { Product } from "../types/Product";
-import { CatalogProduct } from "../components/CatalogProduct";
+import { Await, defer, json, Link, LoaderFunction, useFetcher, useLoaderData, useNavigate, } from "react-router-dom";
+import { getProducts, seedProducts } from "~/datasource/product";
+import { Product } from "~/types/Product";
+import { CatalogProduct } from "@components/CatalogProduct";
 import { Button, ButtonGroup } from "react-bootstrap";
+import { CART_PAGE } from "~/constants/cart";
+import { PRODUCT_ADD_PAGE, PRODUCT_BY_ID_PAGE } from "~/constants/product";
 
 export const loader: LoaderFunction = async () => {
   const products = await getProducts<Product>({ deleted: false });
@@ -30,7 +24,8 @@ export const loader: LoaderFunction = async () => {
   return json({ products });
 };
 
-export interface CatalogProductViewProps extends Product {}
+export interface CatalogProductViewProps extends Product {
+}
 
 export const CatalogProductView: FunctionComponent<CatalogProductViewProps> = ({
   ...product
@@ -40,15 +35,15 @@ export const CatalogProductView: FunctionComponent<CatalogProductViewProps> = ({
 
   const handleAddToCart =
     (product: Product) =>
-    async (ev: React.SyntheticEvent<HTMLButtonElement>) => {
-      fetcher.submit(
-        { productId: product.id, quantity: String(1) },
-        {
-          action: "/cart",
-          method: "post",
-        }
-      );
-    };
+      async (ev: React.SyntheticEvent<HTMLButtonElement>) => {
+        fetcher.submit(
+          { productId: product.id, quantity: String(1) },
+          {
+            action: CART_PAGE,
+            method: "post",
+          }
+        );
+      };
 
   return (
     <React.Fragment>
@@ -56,7 +51,7 @@ export const CatalogProductView: FunctionComponent<CatalogProductViewProps> = ({
       <ButtonGroup>
         <Button
           variant="info"
-          onClick={() => navigate(`/catalog/products/${product.id}`)}
+          onClick={() => navigate(PRODUCT_BY_ID_PAGE.replace(":id", product.id))}
         >
           View
         </Button>
@@ -88,7 +83,7 @@ export const Catalog = () => {
       ) : (
         <p>
           No products found -{" "}
-          <Link to="/catalog/add">
+          <Link to={PRODUCT_ADD_PAGE}>
             <Button>Create a New Product</Button>
           </Link>
         </p>
@@ -98,8 +93,8 @@ export const Catalog = () => {
           {(seededProducts) =>
             seededProducts?.length > 0
               ? seededProducts.map((product: Product) => (
-                  <CatalogProductView key={product.id} {...product} />
-                ))
+                <CatalogProductView key={product.id} {...product} />
+              ))
               : null
           }
         </Await>

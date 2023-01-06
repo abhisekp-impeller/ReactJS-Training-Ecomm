@@ -1,9 +1,10 @@
 import { Form, redirect, useActionData, useRouteError } from "react-router-dom";
-import { addProduct } from "../datasource/product";
-import { Product } from "../types/Product";
-import { ProductErrors } from "../errors/product-errors";
-import { CatalogProduct } from "../components/CatalogProduct";
-import { Button, ButtonGroup } from "react-bootstrap";
+import { addProduct } from "~/datasource/product";
+import { Product } from "~/types/Product";
+import { ProductErrors } from "~/errors/product-errors";
+import { CatalogProduct } from "@components/CatalogProduct";
+import { Button } from "react-bootstrap";
+import { PRODUCT_BY_ID_PAGE } from "~/constants/product";
 
 export const action = async ({ request }: { request: Request }) => {
   const productFormData = await request.formData();
@@ -11,11 +12,12 @@ export const action = async ({ request }: { request: Request }) => {
   const productData = Object.fromEntries(
     productFormData
   ) as unknown as Product;
+  productData.deleted = false;
   console.log("Add Product", productData);
 
   try {
     const product = await addProduct<Product>(productData);
-    return redirect(`/catalog/products/${product.id}`);
+    return redirect(PRODUCT_BY_ID_PAGE.replace(':id', product.id));
   } catch (e) {
     if (e instanceof ProductErrors) {
       return { errors: e };
@@ -42,7 +44,7 @@ export const ProductAdd = () => {
     <div>
       <h1>Product Add</h1>
       <Form method="post">
-        <CatalogProduct mode="add" errors={errors} />
+        <CatalogProduct mode="add" errors={errors}/>
         <Button type="submit" className="btn btn-primary">
           Submit
         </Button>

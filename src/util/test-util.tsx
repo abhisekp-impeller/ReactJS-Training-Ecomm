@@ -1,4 +1,4 @@
-import { createMemoryRouter, createRoutesFromElements, Outlet, Route, RouterProvider } from 'react-router-dom'
+import { createMemoryRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import { render } from '@testing-library/react'
 import { FunctionComponent, ReactElement } from "react";
 import userEvent from "@testing-library/user-event";

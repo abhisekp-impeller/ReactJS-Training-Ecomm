@@ -1,15 +1,12 @@
-import {
-  json,
-  Outlet,
-  ScrollRestoration,
-  useLoaderData,
-} from "react-router-dom";
-import { Container, Nav } from "react-bootstrap";
+import { json, Outlet, ScrollRestoration, useLoaderData, } from "react-router-dom";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getCart } from "../datasource/cart";
 import { Cart } from "../types/Cart";
+import { CART_PAGE } from "../constants/cart";
+import { CATALOG_PAGE, PRODUCT_ADD_PAGE } from "~/constants/product";
 
 export const loader = async () => {
   const cart = await getCart();
@@ -22,27 +19,29 @@ export const Root = () => {
 
   return (
     <Container>
-      <ScrollRestoration />
-      <ToastContainer />
-      <h1>ReactJS Training Ecommerce</h1>
-      <Nav variant="pills" fill>
-        <Nav.Item>
-          <LinkContainer to="/catalog">
-            <Nav.Link>Catalog</Nav.Link>
-          </LinkContainer>
-        </Nav.Item>
-        <Nav.Item>
-          <LinkContainer to="/catalog/add">
-            <Nav.Link>Add New Product</Nav.Link>
-          </LinkContainer>
-        </Nav.Item>
-        <Nav.Item>
-          <LinkContainer to="/cart">
-            <Nav.Link>Cart ({cart?.items?.length})</Nav.Link>
-          </LinkContainer>
-        </Nav.Item>
-      </Nav>
-      <Outlet />
+      <ScrollRestoration/>
+      <ToastContainer/>
+      <Navbar variant="dark" bg="dark">
+        <Container>
+          <Navbar.Brand>
+            <LinkContainer to="/">
+              <Nav.Link>ReactJS Training Ecommerce</Nav.Link>
+            </LinkContainer>
+          </Navbar.Brand>
+          <Nav variant="pills" fill>
+            <LinkContainer to={CATALOG_PAGE}>
+              <Nav.Link>Catalog</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to={PRODUCT_ADD_PAGE}>
+              <Nav.Link>Add New Product</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to={CART_PAGE}>
+              <Nav.Link>Cart ({cart?.items?.length})</Nav.Link>
+            </LinkContainer>
+          </Nav>
+        </Container>
+      </Navbar>
+      <Outlet/>
     </Container>
   );
 };

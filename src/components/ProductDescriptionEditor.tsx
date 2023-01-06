@@ -1,12 +1,5 @@
 import MDEditor from "@uiw/react-md-editor";
-import React, {
-  forwardRef,
-  FunctionComponent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { forwardRef, FunctionComponent, useCallback, useEffect, useRef, useState, } from "react";
 import classNames from "classnames";
 import rehypeSanitize from "rehype-sanitize";
 import katex from "katex";
@@ -54,7 +47,7 @@ const Code: FunctionComponent = ({
   ) {
     return (
       <code ref={demo}>
-        <code id={demoid.current} style={{ display: "none" }} />
+        <code id={demoid.current} style={{ display: "none" }}/>
       </code>
     );
   }
@@ -64,7 +57,7 @@ const Code: FunctionComponent = ({
       const html = katex.renderToString(code.replace(/^\$(.*)\$/, "$1"), {
         throwOnError: false,
       });
-      return <code dangerouslySetInnerHTML={{ __html: html }} />;
+      return <code dangerouslySetInnerHTML={{ __html: html }}/>;
     }
     return <code>{code}</code>;
   }
@@ -77,7 +70,7 @@ const Code: FunctionComponent = ({
       throwOnError: false,
     });
     // console.log("props", code, className, props);
-    return <code dangerouslySetInnerHTML={{ __html: html }} />;
+    return <code dangerouslySetInnerHTML={{ __html: html }}/>;
   }
 
   return <code className={String(className)}>{children}</code>;

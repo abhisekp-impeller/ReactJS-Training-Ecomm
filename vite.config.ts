@@ -20,22 +20,23 @@ export default ({ mode }) => {
     resolve: {
       alias: [
         {
+          find: /^~\/(.*)/,
+          replacement: "/src/$1",
+        },
+        {
           // this is required for the SCSS modules
           find: /^~(.*)$/,
           replacement: '$1',
         },
         {
           // for easy components access
-          find: /^@comp(onent)s?\/(.*)/,
+          find: /^@components\/(.*)/,
           replacement: '/src/components/$1',
         },
         {
-          find: "src",
-          replacement: "/src",
-        },
-        {
-          find: "_",
-          replacement: "/src",
+          // for easy components access
+          find: /^@pages\/(.*)/,
+          replacement: '/src/pages/$1',
         },
         {
           find: "test-util",

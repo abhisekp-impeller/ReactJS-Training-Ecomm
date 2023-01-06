@@ -24,14 +24,11 @@
       "@components/*": [
         "components/*"
       ],
-      "@comps/*": [
-        "components/*"
+      "@pages/*": [
+        "pages/*"
       ],
-      "@component/*": [
-        "components/*"
-      ],
-      "@comp/*": [
-        "components/*"
+      "~/*": [
+        "*"
       ],
       "test-util": [
         "utils/test-util"

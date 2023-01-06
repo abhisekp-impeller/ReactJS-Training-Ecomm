@@ -1,5 +1,5 @@
 import { useRouteLoaderData } from "react-router-dom";
-import { User } from "../types/User";
+import { User } from "~/types/User";
 
 export const Index = () => {
   const { user } = useRouteLoaderData("root") as { user: User };

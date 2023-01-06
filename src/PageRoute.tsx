@@ -9,7 +9,9 @@ import {
 import { action as productEditAction, loader as productEditLoader, ProductEdit, } from "./pages/ProductEdit";
 import { action as productAddAction, ErrorBoundary as ProductAddErrorBoundary, ProductAdd, } from "./pages/ProductAdd";
 import { action as productDeleteAction } from "./pages/ProductDelete";
-import { action as cartAction, CartPage, loader as cartLoader, } from "./pages/Cart";
+import { action as cartAction, CartPage, loader as cartLoader, } from "@pages/cart";
+import { CART_PAGE } from "./constants/cart";
+import { PRODUCT_ADD_PAGE, PRODUCT_BY_ID_PAGE, PRODUCT_DELETE_PAGE, PRODUCT_EDIT_PAGE } from "./constants/product";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,29 +24,29 @@ const router = createBrowserRouter(
         loader={catalogLoader}
       />
       <Route
-        path="/catalog/add"
+        path={PRODUCT_ADD_PAGE}
         element={<ProductAdd/>}
         action={productAddAction}
         index
         errorElement={<ProductAddErrorBoundary/>}
       />
       <Route
-        path="/catalog/products/:id"
+        path={PRODUCT_BY_ID_PAGE}
         element={<ProductView/>}
         index
         loader={productViewLoader}
         errorElement={<ProductViewErrorBoundary/>}
       />
       <Route
-        path="/catalog/products/:id/edit"
+        path={PRODUCT_EDIT_PAGE}
         element={<ProductEdit/>}
         index
         action={productEditAction}
         loader={productEditLoader}
       />
-      <Route path="/catalog/products/:id/delete" action={productDeleteAction}/>
+      <Route path={PRODUCT_DELETE_PAGE} action={productDeleteAction}/>
       <Route
-        path="/cart"
+        path={CART_PAGE}
         element={<CartPage/>}
         action={cartAction}
         loader={cartLoader}
